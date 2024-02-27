@@ -6,9 +6,12 @@ module.exports = {
   theme: {
     colors: {
       transparent: 'transparent',
-      black: '#242424',
-      white: '#fff',
-      orange: '#FF6600'
+      'white': '#ffffff',
+      'blue':'#4f617b',
+      'gray': '#D9D9D9',
+      'orange': '#ff7849',
+      'black': '#242424'
+
     },
     extend: {},
   },

@@ -1,0 +1,27 @@
+<!-- topic-detail-modal.component.html -->
+<div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center">
+  <div class="fixed inset-0 bg-blue/10"></div>
+  <div class="relative bg-white w-11/12 md:w-[800px] lg:w-[800px] rounded-md shadow p-2">
+    <div class="flex justify-end">
+      <button (click)="close()" class="py-2 px-4 text-black rounded-full">X</button>
+    </div>
+    <div class="m-4">
+      <h2 class="text-xl font-bold mb-2">{{topic?.title}}</h2>
+      <div class="flex justify-between border-b-2 border-gray/50 text-black/50 mb-3">
+        <div class="flex border-b border-gray ">
+          {{topic?.score}} by {{topic?.by}} |  <ng-icon name="heroClock" size="16" class="my-auto"></ng-icon> {{topic?.timeAgo}}
+        </div>
+        <div>
+          <ng-icon name="heroChatBubbleOvalLeftEllipsis" size="16" class="my-auto"></ng-icon> {{topic?.countComments}} Comments
+        </div>
+      </div>
+      <div class="w-full relative overflow-y-scroll h-[500px] p-2">
+      <div *ngFor="let kid of topic?.kids">
+        <app-comment [commentId]="kid" [parentSpinner]="parentSpinner"/>
+      </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

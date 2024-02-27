@@ -1,0 +1,51 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<ng-container *ngFor="let chunk of topics | chunk:4; let even = even">
+  <div *ngIf="even; else blockContainer" class="grid-container">
+    <!-- Display the items in a grid container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 mx-auto mb-2">
+      <div *ngFor="let topic of chunk">
+        <div class="bg-slate-500 h-40 rounded-md p-4 bg-white shadow border-2 border-white hover:border-orange transition duration-300">
+          <h1 class="mb-3 h-10">{{topic.title}}</h1>
+          <div class="flex gap-2 border-b-2 border-gray pb-2 mb-2">
+            <p class="text-sm text-black/50">{{topic.score}} points by {{topic.by}}</p>
+          </div>
+          <div class="flex justify-between">
+            <div class="flex items-center text-black/50">
+              <ng-icon name="heroClock" size="16" class="my-auto"></ng-icon>
+              <span class="text-sm ">{{ topic.timeAgo }}</span>
+            </div>
+            <button (click)="openDetailModal(topic)" class="bg-orange/20 py-2 px-4 rounded text-sm text-orange font-semibold flex items-center">
+              <span>{{ topic?.countComments }} Comments</span>
+              <ng-icon name="heroArrowSmallRight" size="20"  class="ml-2 my-auto"></ng-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #blockContainer>
+    <!-- Display the items in a block container -->
+    <div class="mb-2 rounded-md bg-white">
+      <div *ngFor="let topic of chunk" class="border-b-2 border-gray hover:bg-orange/10 transition duration-300">
+        <div class="bg-slate-500 h-28 p-4">
+          <h1 class="mb-3">{{topic.title}}</h1>
+          <div class="flex justify-between">
+            <div class="text-sm text-black/50 flex items-center">
+              {{ topic.score }} points by {{ topic.by }} |
+              <ng-icon name="heroClock" size="16" class="ml-2  my-auto"> </ng-icon>
+              {{ topic.timeAgo }}
+            </div>
+            <button (click)="openDetailModal(topic)" class="bg-orange/20 py-2 px-4 rounded text-sm text-orange font-semibold flex items-center">
+              <span>{{ topic?.countComments }} Comments</span>
+              <ng-icon name="heroArrowSmallRight" size="20" class="ml-2 my-auto"></ng-icon>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <app-topic-detail-page [topic]="modalTopic" [showModal]="showModal" (closeModal)="closeModal()" [parentSpinner]="parentSpinner"></app-topic-detail-page>
+
+</ng-container>
